@@ -74,8 +74,8 @@
                             "apiVersion": "2017-05-10",
                             "name": "PrivateDnsZone-384e4ac2-9197-4d66-82ff-b9abbe40607b",
                             "type": "Microsoft.Resources/deployments",
-                            "subscriptionId": "ed521d8c-344b-475d-b770-4a79a2ebd673",
-                            "resourceGroup": "WebOps_Resource_Group_Usman",
+                            "subscriptionId": "a61dc021-b0c5-4118-8928-03b13c14d8a4",
+                            "resourceGroup": "RGAZWebopsProj8",
                             "properties": {
                                 "mode": "Incremental",
                                 "template": {
@@ -115,8 +115,8 @@
                             "apiVersion": "2017-05-10",
                             "name": "VirtualNetworklink-384e4ac2-9197-4d66-82ff-b9abbe40607c",
                             "type": "Microsoft.Resources/deployments",
-                            "subscriptionId": "ed521d8c-344b-475d-b770-4a79a2ebd673",
-                            "resourceGroup": "WebOps_Resource_Group_Usman",
+                            "subscriptionId": "a61dc021-b0c5-4118-8928-03b13c14d8a4",
+                            "resourceGroup": "RGAZWebopsProj8",
                             "properties": {
                                 "mode": "Incremental",
                                 "template": {
@@ -147,7 +147,7 @@
             "apiVersion": "2017-05-10",
             "name": "DnsZoneGroup-20241206193818",
             "type": "Microsoft.Resources/deployments",
-            "resourceGroup": "WebOps_Resource_Group_Usman",
+            "resourceGroup": "RGAZWebopsProj8",
             "dependsOn": [
                 "[parameters('privateEndpointName')]",
                 "[parameters('privateDnsDeploymentName')]"
@@ -168,7 +168,7 @@
                                     {
                                         "name": "privatelink-vaultcore-azure-net",
                                         "properties": {
-                                            "privateDnsZoneId": "/subscriptions/ed521d8c-344b-475d-b770-4a79a2ebd673/resourceGroups/WebOps_Resource_Group_Usman/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
+                                            "privateDnsZoneId": "/subscriptions/a61dc021-b0c5-4118-8928-03b13c14d8a4/resourceGroups/RGAZWebopsProj8/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
                                         }
                                     }
                                 ]
