@@ -1,0 +1,17 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: webops-azurefile-sc
+provisioner: kubernetes.io/azure-file
+reclaimPolicy: Retain  # Default is Delete, recommended is retain
+volumeBindingMode: Immediate # Default is Immediate, recommended is WaitForFirstConsumer
+allowVolumeExpansion: true  # This allows PVC volume expansion
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - cache=strict
+parameters:
+  skuName: Standard_LRS

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: upload-wp-config-pod
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command: [ "sleep", "infinity" ]
+    volumeMounts:
+    - mountPath: /mnt/azurefile
+      name: webops-azurefile
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "250m"
+  restartPolicy: Never
+  volumes:
+  - name: webops-azurefile
+    persistentVolumeClaim:
+      claimName: webops-azurefile-pvc

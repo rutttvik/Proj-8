@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: webops-azurefile-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: webops-azurefile-sc #Defined in Storage class YAML
+  resources:
+    requests:
+      storage: 5Gi

@@ -1,0 +1,62 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ushipwpbywebops-deployment
+  labels:
+    azure.workload.identity/use: "true"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mywpapp-webops
+  template:  
+    metadata:
+      labels: 
+        app: mywpapp-webops
+    spec:
+      serviceAccountName: "workload-identity-sa"
+      containers:
+        - name: mywpapp-webops
+          image: "${ACR_NAME}.azurecr.io/unaveed1122/project8wp:v1"
+          ports: 
+            - containerPort: 80
+          volumeMounts:
+          - name: secrets-store-webops
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+          - name: secrets-store-webops
+            mountPath: "/var/www/html/DigiCertGlobalRootCA.crt.pem"
+            subPath: "DigiCertGlobalRootCA.crt.pem"
+          - name: webops-wp-azurefile
+            mountPath: "/var/www/html/wp-config.php"
+            subPath: "wp-config.php"
+            readOnly: true
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: azuremysql  # Specify the DB host directly
+            - name: WORDPRESS_DB_NAME
+              value: "webopswordpressdb"
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: secrets-store-webops
+                  key: mysql-db-username
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secrets-store-webops
+                  key: mysql-db-password
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+      volumes:
+        - name: secrets-store-webops
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "azure-kvname-wi"
+        - name: webops-wp-azurefile
+          persistentVolumeClaim:
+            claimName: webops-azurefile-pvc

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ushipwpbywebops-ingress-svc 
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: "nginx"  # Ensures this annotation is correct
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: Your_Domain_Name
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ushipwpbywebops-clustorip-svc
+                port: 
+                  number: 80
+  tls:
+    - hosts:
+      - Your_Domain_Name
+      secretName: Your_Domain_Name-secret-prod

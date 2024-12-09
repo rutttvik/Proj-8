@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: azuremysql
+spec:
+  type: ExternalName
+  externalName: "${MYSQL_SERVER_NAME}.privatelink.mysql.database.azure.com"
+  ports:
+    - port: 3306  # This is the port for MySQL
+      targetPort: 3306  # The port your MySQL service listens on
