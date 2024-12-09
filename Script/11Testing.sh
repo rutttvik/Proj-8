@@ -9,7 +9,7 @@ kubectl get pvc
 kubectl get secrets
 kubectl get ingress
 kubectl logs -f $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
-nslookup ushipideliver.ca
+nslookup v1997.tech
 
 
 kubectl delete -f 9deployment.yaml

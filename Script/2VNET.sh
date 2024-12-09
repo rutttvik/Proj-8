@@ -3,6 +3,9 @@
 
 # Step 01:
 # Create DNS-Zone and make sure it's working
+
+az group create --name dns-zones --location $REGION
+
 az network dns zone create \
   --resource-group $MY_DNS_RESOURCE_GROUP_NAME \
   --name $WEBSITE_NAME
